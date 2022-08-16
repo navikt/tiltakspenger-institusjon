@@ -20,7 +20,7 @@ class InstitusjonService(rapidsConnection: RapidsConnection, val instClient: Ins
     init {
         River(rapidsConnection).apply {
             validate {
-                it.demandAllOrAny("@behov", listOf("person"))
+                it.demandAllOrAny("@behov", listOf("institusjon"))
                 it.forbid("@løsning")
                 it.requireKey("@id", "@behovId")
                 it.requireKey("ident")
