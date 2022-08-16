@@ -84,7 +84,7 @@ class InstitusjonService(rapidsConnection: RapidsConnection, val instClient: Ins
             StructuredArguments.keyValue("id", packet["@id"].asText()),
             StructuredArguments.keyValue("behovId", packet["@behovId"].asText()),
         )
-        SECURELOG.error(
+        LOG.error(
             "feil ${ex.message} ved behandling av behov med {} og {}",
             StructuredArguments.keyValue("id", packet["@id"].asText()),
             StructuredArguments.keyValue("behovId", packet["@behovId"].asText()),
