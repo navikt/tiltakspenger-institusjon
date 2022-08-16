@@ -16,8 +16,8 @@ internal object Configuration {
     )
 
     fun getInstScope(): String = getPropertyValueByEnvironment(
-        devValue = "api://dev-fss.pdl.pdl-api/.default",
-        prodValue = "api://prod-fss.pdl.pdl-api/.default"
+        devValue = "api://dev-fss.team-rocket.inst2/.default",
+        prodValue = "api://prod-fss.team-rocket.inst2/.default"
     )
 
     private val defaultProperties =
