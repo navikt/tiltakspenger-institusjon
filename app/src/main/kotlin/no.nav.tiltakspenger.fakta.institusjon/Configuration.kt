@@ -16,7 +16,7 @@ internal object Configuration {
     )
 
     fun getInstScope(): String = getPropertyValueByEnvironment(
-        devValue = "api://0ffd50cb-d43d-47e5-89ed-eae2007cb6cd/.default",
+        devValue = "api://dev-fss.team-rocket.inst2/.default",
         prodValue = "api://prod-fss.team-rocket.inst2/.default"
     )
 
