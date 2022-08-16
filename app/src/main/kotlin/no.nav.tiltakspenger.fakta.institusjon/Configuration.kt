@@ -3,15 +3,15 @@ package no.nav.tiltakspenger.fakta.institusjon
 internal object Configuration {
     private fun getPropertyValueByEnvironment(devValue: String, prodValue: String): String {
         return when (System.getenv("NAIS_CLUSTER_NAME")) {
-            "dev-gcp" -> devValue
-            "prod-gcp" -> prodValue
+            "dev-fss" -> devValue
+            "prod-fss" -> prodValue
             else -> devValue
         }
     }
 
     fun getInstUrl(): String = getPropertyValueByEnvironment(
-        devValue = "https://inst2.default.svc.nais.local/api/v1/person/institusjonsopphold",
-//      devValue = "https://inst2.dev.intern.nav.no/api/v1/person/institusjonsopphold",
+//        devValue = "https://inst2.default.svc.nais.local/api/v1/person/institusjonsopphold",
+        devValue = "https://inst2.dev.intern.nav.no/api/v1/person/institusjonsopphold",
         prodValue = "https://inst2.default.svc.nais.local/api/v1/person/institusjonsopphold",
     )
 
