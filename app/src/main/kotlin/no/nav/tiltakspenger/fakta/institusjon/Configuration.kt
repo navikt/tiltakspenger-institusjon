@@ -61,7 +61,7 @@ object Configuration {
 //            "stsUrl" to "",
             "application.profile" to Profile.DEV.toString(),
             "instScope" to "api://dev-fss.team-rocket.inst2/.default",
-            "instBaseUrl" to "https://inst2.dev.intern.nav.no",
+            "instBaseUrl" to "https://inst2.team-rocket",
         )
     )
     private val prodProperties = ConfigurationMap(
@@ -69,7 +69,7 @@ object Configuration {
 //            "url" to "",
             "application.profile" to Profile.PROD.toString(),
             "instScope" to "api://prod-fss.team-rocket.inst2/.default",
-            "instBaseUrl" to "https://inst2.dev.intern.nav.no",
+            "instBaseUrl" to "http://inst2.team-rocket",
         )
     )
 
