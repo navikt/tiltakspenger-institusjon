@@ -2,7 +2,7 @@ val javaVersion = JavaVersion.VERSION_17
 val ktorVersion = "2.1.0"
 val kotlinxSerializationVersion = "1.3.3"
 val graphqlKotlinVersion = "5.3.1"
-val kotestVersion = "5.3.2"
+val kotestVersion = "5.4.2"
 val jacksonVersion = "2.13.3"
 
 plugins {
@@ -53,7 +53,7 @@ dependencies {
     testImplementation(platform("org.junit:junit-bom:5.8.2"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("io.mockk:mockk:1.12.4")
-    testImplementation("io.mockk:mockk-dsl-jvm:1.12.4")
+    testImplementation("io.mockk:mockk-dsl-jvm:1.12.5")
     testImplementation("org.skyscreamer:jsonassert:1.5.0")
 }
 
