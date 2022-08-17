@@ -91,7 +91,7 @@ object Configuration {
     )
 
     data class InstClientConfig(
-        val baseUrl: String = config()[Key("InstBaseUrl", stringType)],
+        val baseUrl: String = config()[Key("instBaseUrl", stringType)],
     )
 
 //    private val defaultProperties =
