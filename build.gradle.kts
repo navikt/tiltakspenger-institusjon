@@ -4,16 +4,22 @@ val kotlinxSerializationVersion = "1.3.3"
 
 plugins {
     kotlin("jvm") version "1.7.0"
-    id("org.jmailen.kotlinter") version "3.10.0"
+    id("io.gitlab.arturbosch.detekt") version "1.21.0"
 }
 
 allprojects {
     repositories {
         mavenCentral()
+        mavenLocal()
         maven("https://packages.confluent.io/maven/")
         maven("https://jitpack.io")
     }
-    apply(plugin = "org.jmailen.kotlinter")
+    apply(plugin = "io.gitlab.arturbosch.detekt")
+    detekt {
+        buildUponDefaultConfig = true
+        allRules = false
+        config = files("$rootDir/config/detekt.yml")
+    }
 }
 
 configurations.all {
@@ -25,17 +31,6 @@ java {
     sourceCompatibility = javaVersion
     targetCompatibility = javaVersion
 }
-
-tasks.check {
-    // Må ligge på root nivå
-    dependsOn("installKotlinterPrePushHook")
-}
-
-//detekt {
-//    buildUponDefaultConfig = true
-//    allRules = false
-//    config = files("$projectDir/config/detekt.yml")
-//}
 
 subprojects {
     apply(plugin = "org.jetbrains.kotlin.jvm")
@@ -50,6 +45,8 @@ subprojects {
         test {
             // JUnit 5 support
             useJUnitPlatform()
+            // https://phauer.com/2018/best-practices-unit-testing-kotlin/
+            systemProperty("junit.jupiter.testinstance.lifecycle.default", "per_class")
         }
     }
     configurations.all {
