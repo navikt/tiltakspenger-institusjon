@@ -52,7 +52,7 @@ dependencies {
     testImplementation("io.kotest:kotest-extensions:$kotestVersion")
     testImplementation(platform("org.junit:junit-bom:5.8.2"))
     testImplementation("org.junit.jupiter:junit-jupiter")
-    testImplementation("io.mockk:mockk:1.12.4")
+    testImplementation("io.mockk:mockk:1.12.5")
     testImplementation("io.mockk:mockk-dsl-jvm:1.12.5")
     testImplementation("org.skyscreamer:jsonassert:1.5.0")
 }
