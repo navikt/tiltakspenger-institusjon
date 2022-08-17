@@ -1,15 +1,13 @@
-package no.nav.tiltakspenger.fakta.institusjon.azure
+package no.nav.tiltakspenger.fakta.institusjon.oauth
 
 import java.time.LocalDateTime
 
-const val LEEWAY_SECONDS: Long = 60
 class TokenCache {
     var token: String? = null
         private set
     private var expires: LocalDateTime? = null
 
-    fun isExpired(): Boolean = expires
-        ?.isBefore(LocalDateTime.now().plusSeconds(LEEWAY_SECONDS)) ?: true
+    fun isExpired(): Boolean = expires?.isBefore(LocalDateTime.now()) ?: true
 
     fun update(accessToken: String, expiresIn: Long) {
         token = accessToken

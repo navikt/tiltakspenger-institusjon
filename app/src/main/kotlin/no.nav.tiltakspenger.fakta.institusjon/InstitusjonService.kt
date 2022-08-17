@@ -14,8 +14,10 @@ import no.nav.tiltakspenger.fakta.institusjon.model.Respons
 private val LOG = KotlinLogging.logger {}
 private val SECURELOG = KotlinLogging.logger("tjenestekall")
 
-class InstitusjonService(rapidsConnection: RapidsConnection, val instClient: InstitusjonClient = InstitusjonClient()) :
-    River.PacketListener {
+class InstitusjonService(
+    rapidsConnection: RapidsConnection,
+    private val instClient: InstitusjonClient,
+) : River.PacketListener {
 
     init {
         River(rapidsConnection).apply {
