@@ -19,7 +19,7 @@ import no.nav.tiltakspenger.fakta.institusjon.model.InstitusjonsOpphold
 import no.nav.tiltakspenger.fakta.institusjon.Configuration
 
 class InstitusjonClient(
-    private val skjermingConfig: Configuration.InstClientConfig = Configuration.InstClientConfig(),
+    private val instConfig: Configuration.InstClientConfig = Configuration.InstClientConfig(),
     private val objectMapper: ObjectMapper = defaultObjectMapper(),
     private val getToken: suspend () -> String,
     engine: HttpClientEngine = CIO.create(),
@@ -50,7 +50,7 @@ class InstitusjonClient(
     }
 
     suspend fun hentInstitusjonsOpphold(ident: String, behovId: String): List<InstitusjonsOpphold> =
-        httpClient.get("${skjermingConfig.baseUrl}/api/v1/person/institusjonsopphold") {
+        httpClient.get("${instConfig.baseUrl}/api/v1/person/institusjonsopphold") {
             accept(ContentType.Application.Json)
             header(navCallIdHeader, behovId)
             header(navConsumerId, "TILTAKSPENGER")

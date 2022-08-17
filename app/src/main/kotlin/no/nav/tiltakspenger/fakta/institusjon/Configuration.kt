@@ -69,7 +69,7 @@ object Configuration {
 //            "url" to "",
             "application.profile" to Profile.PROD.toString(),
             "instScope" to "api://prod-fss.team-rocket.inst2/.default",
-            "instBaseUrl" to "https://skjermede-personer-pip.intern.nav.no",
+            "instBaseUrl" to "https://inst2.dev.intern.nav.no",
         )
     )
 
@@ -84,7 +84,7 @@ object Configuration {
     }
 
     data class OauthConfig(
-        val scope: String = config()[Key("skjermingScope", stringType)],
+        val scope: String = config()[Key("instScope", stringType)],
         val clientId: String = config()[Key("AZURE_APP_CLIENT_ID", stringType)],
         val clientSecret: String = config()[Key("AZURE_APP_CLIENT_SECRET", stringType)],
         val wellknownUrl: String = config()[Key("AZURE_APP_WELL_KNOWN_URL", stringType)],
