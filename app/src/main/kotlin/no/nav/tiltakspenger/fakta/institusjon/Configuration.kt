@@ -52,7 +52,7 @@ object Configuration {
         mapOf(
 //            "url" to "",
             "application.profile" to Profile.LOCAL.toString(),
-            "instScope" to "api://dev-gcp.team-rocket.pip-api/.default",
+            "instScope" to "api://dev-fss.team-rocket.inst2/.default",
             "instBaseUrl" to "https://inst2.dev.intern.nav.no",
         )
     )
@@ -60,7 +60,7 @@ object Configuration {
         mapOf(
 //            "stsUrl" to "",
             "application.profile" to Profile.DEV.toString(),
-            "instScope" to "api://dev-gcp.team-rocket.pip-api/.default",
+            "instScope" to "api://dev-fss.team-rocket.inst2/.default",
             "instBaseUrl" to "https://inst2.dev.intern.nav.no",
         )
     )
