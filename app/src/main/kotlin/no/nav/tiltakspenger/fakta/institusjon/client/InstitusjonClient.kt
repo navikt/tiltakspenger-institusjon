@@ -11,13 +11,12 @@ import io.ktor.client.plugins.auth.providers.bearer
 import io.ktor.client.request.accept
 import io.ktor.client.request.get
 import io.ktor.client.request.header
-import io.ktor.client.utils.EmptyContent.contentType
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
-import no.nav.tiltakspenger.fakta.institusjon.Configuration
 import no.nav.tiltakspenger.fakta.institusjon.defaultHttpClient
 import no.nav.tiltakspenger.fakta.institusjon.defaultObjectMapper
 import no.nav.tiltakspenger.fakta.institusjon.model.InstitusjonsOpphold
+import no.nav.tiltakspenger.fakta.institusjon.Configuration
 
 class InstitusjonClient(
     private val skjermingConfig: Configuration.InstClientConfig = Configuration.InstClientConfig(),
@@ -59,24 +58,4 @@ class InstitusjonClient(
             header(navPersonIdent, ident)
             contentType(ContentType.Application.Json)
         }.body()
-
-//    private suspend fun hentInstOpphold(ident: String, behovId: String) : Either<KunneIkkeHenteInstitusjonsopphold, List<InstitusjonsOpphold>> {
-//        return kotlin.runCatching {
-//            client.get(Configuration.getInstUrl()) {
-//                accept(ContentType.Application.Json)
-//                header("Nav-Call-Id", behovId)
-//                header("Nav-Consumer-Id", "TILTAKSPENGER")
-//                header("Med-Institusjonsinformasjon", true)
-//                header("Nav-Personident", ident)
-//                contentType(ContentType.Application.Json)
-//            }.body<List<InstitusjonsOpphold>>()
-//        }.fold(
-//            { it.right() },
-//            { KunneIkkeHenteInstitusjonsopphold.left() },
-//        )
-//    }
-//
-//    suspend fun hentInstitusjonsoppholdFor(ident: String, behovId: String) : Either<KunneIkkeHenteInstitusjonsopphold, List<InstitusjonsOpphold>> {
-//        return hentInstOpphold(ident, behovId)
-//    }
 }

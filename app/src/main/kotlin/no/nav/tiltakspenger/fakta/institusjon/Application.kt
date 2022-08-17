@@ -2,8 +2,8 @@ package no.nav.tiltakspenger.fakta.institusjon
 
 import mu.KotlinLogging
 import no.nav.helse.rapids_rivers.RapidApplication
-import no.nav.tiltakspenger.fakta.institusjon.client.InstitusjonClient
 import no.nav.tiltakspenger.fakta.institusjon.oauth.AzureTokenProvider
+import no.nav.tiltakspenger.fakta.institusjon.client.InstitusjonClient
 
 private val LOG = KotlinLogging.logger {}
 private val SECURELOG = KotlinLogging.logger("tjenestekall")
