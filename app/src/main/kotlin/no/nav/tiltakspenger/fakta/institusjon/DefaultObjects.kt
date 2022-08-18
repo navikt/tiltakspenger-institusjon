@@ -58,6 +58,11 @@ fun defaultHttpClient(
     }
     this.expectSuccess = true
 
+    engine {
+        System.getenv("HTTP_PROXY")?.let {
+            this.proxy = ProxyBuilder.http(Url(it))
+        }
+    }
     apply(configBlock)
 }
 
