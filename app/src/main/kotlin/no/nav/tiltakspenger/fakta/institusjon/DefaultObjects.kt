@@ -28,6 +28,7 @@ private val SECURELOG = KotlinLogging.logger("tjenestekall")
 private object SecurelogWrapper : Logger {
     override fun log(message: String) {
         LOG.info("HttpClient detaljer logget til securelog")
+        LOG.error("HttpClient feil $message")
         SECURELOG.info(message)
     }
 }
