@@ -9,6 +9,7 @@ import com.fasterxml.jackson.module.kotlin.KotlinModule
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.HttpClientEngine
+import io.ktor.client.engine.ProxyBuilder
 import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
@@ -16,6 +17,7 @@ import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.http.ContentType
+import io.ktor.http.Url
 import io.ktor.serialization.jackson.JacksonConverter
 import java.time.Duration
 import mu.KotlinLogging
@@ -33,7 +35,11 @@ private object SecurelogWrapper : Logger {
 @Suppress("MagicNumber")
 fun defaultHttpClient(
     objectMapper: ObjectMapper,
-    engine: HttpClientEngine = CIO.create(),
+    engine: HttpClientEngine = CIO.create {
+        System.getenv("HTTP_PROXY")?.let {
+            this.proxy = ProxyBuilder.http(Url(it))
+        }
+    },
     configBlock: HttpClientConfig<*>.() -> Unit = {}
 ) = HttpClient(engine) {
     install(ContentNegotiation) {
