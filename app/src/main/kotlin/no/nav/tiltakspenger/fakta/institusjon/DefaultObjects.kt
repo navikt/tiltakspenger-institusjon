@@ -17,8 +17,8 @@ import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.http.ContentType
 import io.ktor.serialization.jackson.JacksonConverter
-import mu.KotlinLogging
 import java.time.Duration
+import mu.KotlinLogging
 
 private val LOG = KotlinLogging.logger {}
 private val SECURELOG = KotlinLogging.logger("tjenestekall")
@@ -26,6 +26,7 @@ private val SECURELOG = KotlinLogging.logger("tjenestekall")
 private object SecurelogWrapper : Logger {
     override fun log(message: String) {
         LOG.info("HttpClient detaljer logget til securelog")
+        LOG.error(message)
         SECURELOG.info(message)
     }
 }

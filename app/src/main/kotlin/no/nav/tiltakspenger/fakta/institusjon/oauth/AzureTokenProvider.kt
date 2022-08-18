@@ -9,6 +9,7 @@ import io.ktor.client.engine.cio.CIO
 import io.ktor.client.request.forms.submitForm
 import io.ktor.client.request.get
 import io.ktor.http.Parameters
+import kotlinx.coroutines.runBlocking
 import no.nav.tiltakspenger.fakta.institusjon.Configuration
 import no.nav.tiltakspenger.fakta.institusjon.defaultHttpClient
 import no.nav.tiltakspenger.fakta.institusjon.defaultObjectMapper
@@ -24,26 +25,28 @@ class AzureTokenProvider(
 
     private val tokenCache = TokenCache()
 
-    override suspend fun getToken(): String {
+    override fun getToken(): String {
         val currentToken = tokenCache.token
         return if (currentToken != null && !tokenCache.isExpired()) currentToken
         else clientCredentials()
     }
 
-    private suspend fun wellknown(): WellKnown {
-        return azureHttpClient.get(config.wellknownUrl).body()
+    private fun wellknown(): WellKnown {
+        return runBlocking { azureHttpClient.get(config.wellknownUrl).body() }
     }
 
-    private suspend fun clientCredentials(): String {
-        return azureHttpClient.submitForm(
-            url = wellknown().tokenEndpoint,
-            formParameters = Parameters.build {
-                append("grant_type", "client_credentials")
-                append("client_id", config.clientId)
-                append("client_secret", config.clientSecret)
-                append("scope", config.scope)
-            }
-        ).body<OAuth2AccessTokenResponse>().let {
+    private fun clientCredentials(): String {
+        return runBlocking {
+            azureHttpClient.submitForm(
+                url = wellknown().tokenEndpoint,
+                formParameters = Parameters.build {
+                    append("grant_type", "client_credentials")
+                    append("client_id", config.clientId)
+                    append("client_secret", config.clientSecret)
+                    append("scope", config.scope)
+                }
+            ).body<OAuth2AccessTokenResponse>()
+        }.let {
             tokenCache.update(
                 it.accessToken,
                 it.expiresIn.toLong()
