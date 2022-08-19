@@ -43,7 +43,7 @@ class InstitusjonService(
                     instClient.hentInstitusjonsOpphold(fnr, behovId.asText())
                 }.let { response ->
                     packet["@løsning"] = Respons(opphold = response, feilmelding = null)
-                    loggVedUtgang(packet) { response.toString() }
+                    loggVedUtgang(packet)
                     context.publish(packet.toJson())
                 }
             }
@@ -66,7 +66,7 @@ class InstitusjonService(
         SECURELOG.debug { "mottok melding: ${packet.toJson()}" }
     }
 
-    private fun loggVedUtgang(packet: JsonMessage, løsning: () -> String) {
+    private fun loggVedUtgang(packet: JsonMessage) {
         LOG.info(
             "har løst behov med {} og {}",
             StructuredArguments.keyValue("id", packet["@id"].asText()),
@@ -77,7 +77,7 @@ class InstitusjonService(
             StructuredArguments.keyValue("id", packet["@id"].asText()),
             StructuredArguments.keyValue("behovId", packet["@behovId"].asText()),
         )
-        SECURELOG.debug { "publiserer løsning: $løsning" }
+        SECURELOG.debug { "publiserer melding: $packet" }
     }
 
     private fun loggVedFeil(ex: Throwable, packet: JsonMessage) {
