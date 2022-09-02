@@ -3,18 +3,18 @@ package no.nav.tiltakspenger.fakta.institusjon
 import mu.KotlinLogging
 import no.nav.helse.rapids_rivers.RapidApplication
 import no.nav.helse.rapids_rivers.RapidsConnection
-import no.nav.tiltakspenger.fakta.institusjon.oauth.AzureTokenProvider
 import no.nav.tiltakspenger.fakta.institusjon.client.InstitusjonClient
-
-private val LOG = KotlinLogging.logger {}
-private val SECURELOG = KotlinLogging.logger("tjenestekall")
+import no.nav.tiltakspenger.fakta.institusjon.oauth.AzureTokenProvider
 
 fun main() {
-    Thread.setDefaultUncaughtExceptionHandler { _, e ->
-        LOG.error { "Uncaught exception logget i securelog" }
-        SECURELOG.error(e) { e.message }
-    }
+    System.setProperty("logback.configurationFile", "egenLogback.xml")
+    val log = KotlinLogging.logger {}
+    val securelog = KotlinLogging.logger("tjenestekall")
 
+    Thread.setDefaultUncaughtExceptionHandler { _, e ->
+        log.error { "Uncaught exception logget i securelog" }
+        securelog.error(e) { e.message }
+    }
     val tokenProvider = AzureTokenProvider()
 
     RapidApplication.create(Configuration.rapidsAndRivers)
@@ -26,11 +26,11 @@ fun main() {
 
             register(object : RapidsConnection.StatusListener {
                 override fun onStartup(rapidsConnection: RapidsConnection) {
-                    LOG.info { "Starting tiltakspenger-fakta-institusjon" }
+                    log.info { "Starting tiltakspenger-fakta-institusjon" }
                 }
 
                 override fun onShutdown(rapidsConnection: RapidsConnection) {
-                    LOG.info { "Stopping tiltakspenger-fakta-institusjon" }
+                    log.info { "Stopping tiltakspenger-fakta-institusjon" }
                     super.onShutdown(rapidsConnection)
                 }
             })
