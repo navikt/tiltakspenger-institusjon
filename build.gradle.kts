@@ -51,7 +51,7 @@ dependencies {
     implementation("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jacksonVersion")
     // Arrow
-    implementation("io.arrow-kt:arrow-core:1.1.2")
+    implementation("io.arrow-kt:arrow-core:1.1.3")
 
     // auth
     implementation("io.ktor:ktor-client-auth:$ktorVersion")
