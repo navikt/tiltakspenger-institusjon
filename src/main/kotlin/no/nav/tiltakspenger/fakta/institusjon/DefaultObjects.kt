@@ -32,18 +32,11 @@ private object SecurelogWrapper : Logger {
 @Suppress("MagicNumber")
 fun defaultHttpClient(
     objectMapper: ObjectMapper,
-    engine: HttpClientEngine? = CIO.create(),
+    engine: HttpClientEngine?,
     configBlock: HttpClientConfig<*>.() -> Unit = {}
-) = if (engine != null) {
-    HttpClient(engine) {
-        apply(defaultSetup(objectMapper))
-        apply(configBlock)
-    }
-} else {
-    HttpClient(CIO) {
-        apply(defaultSetup(objectMapper))
-        apply(configBlock)
-    }
+) = HttpClient(engine ?: CIO.create()) {
+    apply(defaultSetup(objectMapper))
+    apply(configBlock)
 }
 
 private fun defaultSetup(objectMapper: ObjectMapper): HttpClientConfig<*>.() -> Unit = {
