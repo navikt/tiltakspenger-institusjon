@@ -4,68 +4,39 @@ package no.nav.tiltakspenger.fakta.institusjon.auth
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.databind.ObjectMapper
-import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.*
 import io.ktor.client.engine.cio.*
-import io.ktor.client.plugins.*
-import io.ktor.client.plugins.contentnegotiation.*
-import io.ktor.client.plugins.logging.*
 import io.ktor.client.request.*
 import io.ktor.client.request.forms.*
 import io.ktor.http.*
-import io.ktor.serialization.jackson.*
 import mu.KotlinLogging
 import no.nav.tiltakspenger.fakta.institusjon.Configuration
+import no.nav.tiltakspenger.fakta.institusjon.defaultHttpClient
 import no.nav.tiltakspenger.fakta.institusjon.defaultObjectMapper
-import java.time.Duration
 import java.time.LocalDateTime
 
 
 private val LOG = KotlinLogging.logger {}
-private val SECURELOG = KotlinLogging.logger("tjenestekall")
 
 fun interface TokenProvider {
     suspend fun getToken(): String
 }
 
-@Suppress("MagicNumber")
-fun azureHttpClient(
-    objectMapper: ObjectMapper,
-) = HttpClient(CIO) {
-    install(ContentNegotiation) {
-        register(ContentType.Application.Json, JacksonConverter(objectMapper))
-    }
-    install(HttpTimeout) {
-        connectTimeoutMillis = Duration.ofSeconds(60).toMillis()
-        requestTimeoutMillis = Duration.ofSeconds(60).toMillis()
-        socketTimeoutMillis = Duration.ofSeconds(60).toMillis()
-    }
-
-    this.install(Logging) {
-        logger = object : Logger {
-            override fun log(message: String) {
-                SECURELOG.info { message }
-            }
-        }
-        level = LogLevel.ALL
-    }
-    this.expectSuccess = true
-
-    engine {
-        System.getenv("HTTP_PROXY")?.let {
-            LOG.info("Setter opp proxy mot $it")
-            this.proxy = ProxyBuilder.http(it)
-        }
-    }
-}
-
 @Suppress("TooGenericExceptionCaught")
 class AzureTokenProvider(
     objectMapper: ObjectMapper = defaultObjectMapper(),
+    engine: HttpClientEngineFactory<out HttpClientEngineConfig> = CIO,
     private val config: OauthConfig = Configuration.oauthConfig(),
 ) : TokenProvider {
-    private val azureHttpClient = azureHttpClient(objectMapper = objectMapper)
+    private val azureHttpClient = defaultHttpClient(objectMapper = objectMapper, engine = engine) {
+        engine {
+            System.getenv("HTTP_PROXY")?.let {
+                LOG.info("Setter opp proxy mot $it")
+                this.proxy = ProxyBuilder.http(it)
+            }
+        }
+    }
 
     private val tokenCache = TokenCache()
 
