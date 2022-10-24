@@ -29,20 +29,10 @@ fun interface TokenProvider {
     suspend fun getToken(): String
 }
 
-private object SecurelogWrapper : Logger {
-    override fun log(message: String) {
-        LOG.info("HttpClient detaljer logget til securelog")
-        //LOG.error("HttpClient feil $message")
-        SECURELOG.info(message)
-    }
-}
-
 @Suppress("MagicNumber")
 fun azureHttpClient(
     objectMapper: ObjectMapper,
-    engine: HttpClientEngine = CIO.create(),
-    configBlock: HttpClientConfig<*>.() -> Unit = {}
-) = HttpClient(engine) {
+) = HttpClient(CIO) {
     install(ContentNegotiation) {
         register(ContentType.Application.Json, JacksonConverter(objectMapper))
     }
@@ -53,21 +43,21 @@ fun azureHttpClient(
     }
 
     this.install(Logging) {
-        logger = SecurelogWrapper
+        logger = object : Logger {
+            override fun log(message: String) {
+                SECURELOG.info { message }
+            }
+        }
         level = LogLevel.ALL
     }
     this.expectSuccess = true
 
-    LOG.info("Setter opp engine")
     engine {
-        LOG.info("Setter opp proxy")
         System.getenv("HTTP_PROXY")?.let {
-            LOG.info("Setter opp proxy mot Azure på $it")
+            LOG.info("Setter opp proxy mot $it")
             this.proxy = ProxyBuilder.http(it)
         }
     }
-
-    apply(configBlock)
 }
 
 @Suppress("TooGenericExceptionCaught")
