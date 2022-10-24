@@ -29,11 +29,9 @@ class AzureTokenProvider(
     private val config: OauthConfig = Configuration.oauthConfig(),
 ) : TokenProvider {
     private val azureHttpClient = defaultHttpClient(objectMapper = objectMapper, engine = engine) {
-        engine {
-            System.getenv("HTTP_PROXY")?.let {
-                LOG.info("Setter opp proxy mot $it")
-                this.proxy = ProxyBuilder.http(it)
-            }
+        System.getenv("HTTP_PROXY")?.let {
+            LOG.info("Setter opp proxy mot $it")
+            this.proxy = ProxyBuilder.http(it)
         }
     }
 
