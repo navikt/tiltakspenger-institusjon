@@ -6,7 +6,7 @@ import java.time.LocalDateTime
 data class InstitusjonsOpphold(
     val oppholdId: Long,
     val tssEksternId: String,
-    val organisasjonsnummer: String,
+    val organisasjonsnummer: String?,
     val institusjonstype: String,
     val kategori: String,
     val startdato: LocalDate,
