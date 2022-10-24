@@ -33,14 +33,17 @@ private object SecurelogWrapper : Logger {
 fun defaultHttpClient(
     objectMapper: ObjectMapper,
     engine: HttpClientEngine? = null,
-    configBlock: CIOEngineConfig.() -> Unit = {}
+    configBlock: HttpClientConfig<*>.() -> Unit = {},
+    engineConfigBlock: CIOEngineConfig.() -> Unit = {}
 ) = engine?.let {
     HttpClient(it) {
         apply(defaultSetup(objectMapper))
+        apply(configBlock)
     }
 } ?: HttpClient(CIO) {
     apply(defaultSetup(objectMapper))
-    engine(configBlock)
+    apply(configBlock)
+    engine(engineConfigBlock)
 }
 
 private fun defaultSetup(objectMapper: ObjectMapper): HttpClientConfig<*>.() -> Unit = {
