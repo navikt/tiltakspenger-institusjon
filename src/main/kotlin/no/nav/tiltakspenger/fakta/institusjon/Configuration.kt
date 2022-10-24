@@ -85,7 +85,7 @@ object Configuration {
     }
 
     fun oauthConfig(
-        scope: String = config()[Key("pdlScope", stringType)],
+        scope: String = config()[Key("instScope", stringType)],
         clientId: String = config()[Key("AZURE_APP_CLIENT_ID", stringType)],
         clientSecret: String = config()[Key("AZURE_APP_CLIENT_SECRET", stringType)],
         wellknownUrl: String = config()[Key("AZURE_APP_WELL_KNOWN_URL", stringType)]
@@ -95,7 +95,7 @@ object Configuration {
         clientSecret = clientSecret,
         wellknownUrl = wellknownUrl
     )
-    
+
     data class InstClientConfig(
         val baseUrl: String = config()[Key("instBaseUrl", stringType)],
     )
