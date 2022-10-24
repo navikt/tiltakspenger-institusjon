@@ -27,6 +27,12 @@ fun main() {
             register(object : RapidsConnection.StatusListener {
                 override fun onStartup(rapidsConnection: RapidsConnection) {
                     log.info { "Starting tiltakspenger-fakta-institusjon" }
+
+                    val environmentVariables = System.getenv()
+                    log.info("Dette er proxy-innstillingene")
+                    log.info("HTTP_PROXY=${environmentVariables["HTTP_PROXY"]}")
+                    log.info("HTTPS_PROXY=${environmentVariables["HTTPS_PROXY"]}")
+                    log.info("NO_PROXY=${environmentVariables["NO_PROXY"]}")
                 }
 
                 override fun onShutdown(rapidsConnection: RapidsConnection) {

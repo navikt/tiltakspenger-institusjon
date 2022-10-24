@@ -51,7 +51,7 @@ fun defaultHttpClient(
         level = LogLevel.ALL
     }
     this.expectSuccess = true
-    
+
     apply(configBlock)
 }
 
