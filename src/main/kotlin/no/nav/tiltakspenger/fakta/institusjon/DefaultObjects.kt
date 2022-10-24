@@ -31,10 +31,7 @@ private object SecurelogWrapper : Logger {
 @Suppress("MagicNumber")
 fun defaultHttpClient(
     objectMapper: ObjectMapper,
-    engine: HttpClientEngine = CIO.create {
-        this.proxy =
-            ProxyBuilder.http(System.getenv("HTTP_PROXY").also { LOG.info { "Setter opp HTTP_PROXY mot $it" } })
-    },
+    engine: HttpClientEngine = CIO.create(),
     configBlock: HttpClientConfig<*>.() -> Unit = {}
 ) = HttpClient(engine) {
     install(ContentNegotiation) {
