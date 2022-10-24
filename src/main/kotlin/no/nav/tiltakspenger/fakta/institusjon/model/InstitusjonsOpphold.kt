@@ -14,6 +14,6 @@ data class InstitusjonsOpphold(
     val kilde: String,
     val endretAv: String,
     val endringstidspunkt: LocalDateTime,
-    val institusjonsnavn: String,
+    val institusjonsnavn: String?,
     val avdelingsnavn: String,
 )
