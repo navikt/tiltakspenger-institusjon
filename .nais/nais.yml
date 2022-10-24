@@ -23,7 +23,3 @@ spec:
     application:
       enabled: true
   webproxy: true
-  accessPolicy:
-    outbound:
-      external:
-        - host: login.microsoftonline.com
