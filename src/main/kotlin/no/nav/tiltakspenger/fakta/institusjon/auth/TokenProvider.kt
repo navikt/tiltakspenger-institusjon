@@ -26,17 +26,15 @@ fun interface TokenProvider {
 @Suppress("TooGenericExceptionCaught")
 class AzureTokenProvider(
     objectMapper: ObjectMapper = defaultObjectMapper(),
-    engine: HttpClientEngine = CIO.create(),
+    engine: HttpClientEngine = CIO.create {
+        System.getenv("HTTP_PROXY")?.let {
+            LOG.info("Setter opp proxy mot $it")
+            this.proxy = ProxyBuilder.http(it)
+        }
+    },
     private val config: OauthConfig = Configuration.oauthConfig(),
 ) : TokenProvider {
-    private val azureHttpClient = defaultHttpClient(objectMapper = objectMapper, engine = engine) {
-        engine {
-            System.getenv("HTTP_PROXY")?.let {
-                LOG.info("Setter opp proxy mot $it")
-                this.proxy = ProxyBuilder.http(it)
-            }
-        }
-    }
+    private val azureHttpClient = defaultHttpClient(objectMapper = objectMapper, engine = engine)
 
     private val tokenCache = TokenCache()
 
