@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.ktor.client.call.*
 import io.ktor.client.engine.*
-import io.ktor.client.engine.cio.*
 import io.ktor.client.request.*
 import io.ktor.client.request.forms.*
 import io.ktor.http.*
@@ -26,15 +25,17 @@ fun interface TokenProvider {
 @Suppress("TooGenericExceptionCaught")
 class AzureTokenProvider(
     objectMapper: ObjectMapper = defaultObjectMapper(),
-    engine: HttpClientEngine = CIO.create {
-        System.getenv("HTTP_PROXY")?.let {
-            LOG.info("Setter opp proxy mot $it")
-            this.proxy = ProxyBuilder.http(it)
-        }
-    },
+    engine: HttpClientEngine? = null,
     private val config: OauthConfig = Configuration.oauthConfig(),
 ) : TokenProvider {
-    private val azureHttpClient = defaultHttpClient(objectMapper = objectMapper, engine = engine)
+    private val azureHttpClient = defaultHttpClient(objectMapper = objectMapper, engine = engine) {
+        engine {
+            System.getenv("HTTP_PROXY")?.let {
+                LOG.info("Setter opp proxy mot $it")
+                this.proxy = ProxyBuilder.http(it)
+            }
+        }
+    }
 
     private val tokenCache = TokenCache()
 
