@@ -19,6 +19,7 @@ import java.time.Duration
 
 private val LOG = KotlinLogging.logger {}
 private val SECURELOG = KotlinLogging.logger("tjenestekall")
+private const val SIXTY_SECONDS = 60L
 
 private object SecurelogWrapper : Logger {
     override fun log(message: String) {
@@ -31,16 +32,28 @@ private object SecurelogWrapper : Logger {
 @Suppress("MagicNumber")
 fun defaultHttpClient(
     objectMapper: ObjectMapper,
-    engine: HttpClientEngine = CIO.create(),
+    engine: HttpClientEngine?,
     configBlock: HttpClientConfig<*>.() -> Unit = {}
-) = HttpClient(engine) {
+) = if (engine != null) {
+    HttpClient(engine) {
+        defaultSetup(objectMapper)()
+        configBlock()
+    }
+} else {
+    HttpClient(CIO) {
+        defaultSetup(objectMapper)()
+        configBlock()
+    }
+}
+
+private fun defaultSetup(objectMapper: ObjectMapper): HttpClientConfig<*>.() -> Unit = {
     install(ContentNegotiation) {
         register(ContentType.Application.Json, JacksonConverter(objectMapper))
     }
     install(HttpTimeout) {
-        connectTimeoutMillis = Duration.ofSeconds(60).toMillis()
-        requestTimeoutMillis = Duration.ofSeconds(60).toMillis()
-        socketTimeoutMillis = Duration.ofSeconds(60).toMillis()
+        connectTimeoutMillis = Duration.ofSeconds(SIXTY_SECONDS).toMillis()
+        requestTimeoutMillis = Duration.ofSeconds(SIXTY_SECONDS).toMillis()
+        socketTimeoutMillis = Duration.ofSeconds(SIXTY_SECONDS).toMillis()
     }
 
     this.install(Logging) {
@@ -48,8 +61,6 @@ fun defaultHttpClient(
         level = LogLevel.ALL
     }
     this.expectSuccess = true
-
-    apply(configBlock)
 }
 
 fun defaultObjectMapper(): ObjectMapper = ObjectMapper()
