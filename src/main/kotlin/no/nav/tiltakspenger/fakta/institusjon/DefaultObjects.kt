@@ -34,9 +34,13 @@ fun defaultHttpClient(
     objectMapper: ObjectMapper,
     engine: HttpClientEngine? = null,
     configBlock: CIOEngineConfig.() -> Unit = {}
-) = HttpClient(engine ?: CIO.create(configBlock)) {
+) = engine?.let {
+    HttpClient(it) {
+        apply(defaultSetup(objectMapper))
+    }
+} ?: HttpClient(CIO) {
     apply(defaultSetup(objectMapper))
-    //apply(configBlock)
+    engine(configBlock)
 }
 
 private fun defaultSetup(objectMapper: ObjectMapper): HttpClientConfig<*>.() -> Unit = {
