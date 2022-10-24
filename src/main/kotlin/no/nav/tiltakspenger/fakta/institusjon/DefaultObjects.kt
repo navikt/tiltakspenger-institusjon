@@ -36,13 +36,13 @@ fun defaultHttpClient(
     configBlock: HttpClientConfig<*>.() -> Unit = {}
 ) = if (engine != null) {
     HttpClient(engine) {
-        defaultSetup(objectMapper)()
-        configBlock()
+        apply(defaultSetup(objectMapper))
+        apply(configBlock)
     }
 } else {
     HttpClient(CIO) {
-        defaultSetup(objectMapper)()
-        configBlock()
+        apply(defaultSetup(objectMapper))
+        apply(configBlock)
     }
 }
 
