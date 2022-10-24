@@ -54,10 +54,8 @@ fun defaultHttpClient(
     this.expectSuccess = true
 
     engine {
-        System.getenv("HTTP_PROXY")?.let {
-            LOG.info { "Setter opp HTTP_PROXY mot $it" }
-            this.proxy = ProxyBuilder.http(Url(it))
-        }
+        this.proxy =
+            ProxyBuilder.http(System.getenv("HTTP_PROXY").also { LOG.info { "Setter opp HTTPS_PROXY mot $it" } })
     }
     apply(configBlock)
 }
