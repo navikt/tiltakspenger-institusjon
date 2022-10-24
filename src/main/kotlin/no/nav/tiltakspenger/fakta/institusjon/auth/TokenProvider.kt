@@ -26,7 +26,7 @@ fun interface TokenProvider {
 @Suppress("TooGenericExceptionCaught")
 class AzureTokenProvider(
     objectMapper: ObjectMapper = defaultObjectMapper(),
-    engine: HttpClientEngineFactory<out HttpClientEngineConfig> = CIO,
+    engine: HttpClientEngine = CIO.create(),
     private val config: OauthConfig = Configuration.oauthConfig(),
 ) : TokenProvider {
     private val azureHttpClient = defaultHttpClient(objectMapper = objectMapper, engine = engine) {

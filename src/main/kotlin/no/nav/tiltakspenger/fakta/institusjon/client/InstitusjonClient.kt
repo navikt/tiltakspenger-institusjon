@@ -16,7 +16,7 @@ class InstitusjonClient(
     private val instConfig: Configuration.InstClientConfig = Configuration.InstClientConfig(),
     private val objectMapper: ObjectMapper = defaultObjectMapper(),
     private val getToken: suspend () -> String,
-    engine: HttpClientEngineFactory<HttpClientEngineConfig> = CIO,
+    engine: HttpClientEngine = CIO.create(),
     private val httpClient: HttpClient = defaultHttpClient(
         objectMapper = objectMapper,
         engine = engine
