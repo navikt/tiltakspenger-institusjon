@@ -32,9 +32,8 @@ private object SecurelogWrapper : Logger {
 fun defaultHttpClient(
     objectMapper: ObjectMapper,
     engine: HttpClientEngine = CIO.create {
-        System.getenv("HTTP_PROXY")?.let {
-            this.proxy = ProxyBuilder.http(Url(it))
-        }
+        this.proxy =
+            ProxyBuilder.http(System.getenv("HTTP_PROXY").also { LOG.info { "Setter opp HTTP_PROXY mot $it" } })
     },
     configBlock: HttpClientConfig<*>.() -> Unit = {}
 ) = HttpClient(engine) {
@@ -55,7 +54,7 @@ fun defaultHttpClient(
 
     engine {
         this.proxy =
-            ProxyBuilder.http(System.getenv("HTTP_PROXY").also { LOG.info { "Setter opp HTTPS_PROXY mot $it" } })
+            ProxyBuilder.http(System.getenv("HTTP_PROXY").also { LOG.info { "Setter opp HTTP_PROXY mot $it" } })
     }
     apply(configBlock)
 }
