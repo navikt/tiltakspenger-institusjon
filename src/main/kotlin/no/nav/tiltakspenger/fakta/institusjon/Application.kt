@@ -3,8 +3,8 @@ package no.nav.tiltakspenger.fakta.institusjon
 import mu.KotlinLogging
 import no.nav.helse.rapids_rivers.RapidApplication
 import no.nav.helse.rapids_rivers.RapidsConnection
+import no.nav.tiltakspenger.fakta.institusjon.auth.AzureTokenProvider
 import no.nav.tiltakspenger.fakta.institusjon.client.InstitusjonClient
-import no.nav.tiltakspenger.fakta.institusjon.oauth.AzureTokenProvider
 
 fun main() {
     System.setProperty("logback.configurationFile", "egenLogback.xml")

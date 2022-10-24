@@ -6,6 +6,7 @@ import com.natpryce.konfig.EnvironmentVariables
 import com.natpryce.konfig.Key
 import com.natpryce.konfig.overriding
 import com.natpryce.konfig.stringType
+import no.nav.tiltakspenger.fakta.institusjon.auth.AzureTokenProvider
 
 object Configuration {
 //    private fun getPropertyValueByEnvironment(devValue: String, prodValue: String): String {
@@ -83,13 +84,18 @@ object Configuration {
         }
     }
 
-    data class OauthConfig(
-        val scope: String = config()[Key("instScope", stringType)],
-        val clientId: String = config()[Key("AZURE_APP_CLIENT_ID", stringType)],
-        val clientSecret: String = config()[Key("AZURE_APP_CLIENT_SECRET", stringType)],
-        val wellknownUrl: String = config()[Key("AZURE_APP_WELL_KNOWN_URL", stringType)],
+    fun oauthConfig(
+        scope: String = config()[Key("pdlScope", stringType)],
+        clientId: String = config()[Key("AZURE_APP_CLIENT_ID", stringType)],
+        clientSecret: String = config()[Key("AZURE_APP_CLIENT_SECRET", stringType)],
+        wellknownUrl: String = config()[Key("AZURE_APP_WELL_KNOWN_URL", stringType)]
+    ) = AzureTokenProvider.OauthConfig(
+        scope = scope,
+        clientId = clientId,
+        clientSecret = clientSecret,
+        wellknownUrl = wellknownUrl
     )
-
+    
     data class InstClientConfig(
         val baseUrl: String = config()[Key("instBaseUrl", stringType)],
     )
