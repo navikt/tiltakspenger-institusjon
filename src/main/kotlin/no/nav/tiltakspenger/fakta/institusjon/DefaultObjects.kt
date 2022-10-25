@@ -21,14 +21,6 @@ private val LOG = KotlinLogging.logger {}
 private val SECURELOG = KotlinLogging.logger("tjenestekall")
 private const val SIXTY_SECONDS = 60L
 
-private object SecurelogWrapper : Logger {
-    override fun log(message: String) {
-        LOG.info("HttpClient detaljer logget til securelog")
-        //LOG.error("HttpClient feil $message")
-        SECURELOG.info(message)
-    }
-}
-
 // engine skal brukes primært i test-øyemed, når man sender med MockEngine.
 // Forøvrig kan man la den være null.
 fun defaultHttpClient(
@@ -58,7 +50,12 @@ private fun defaultSetup(objectMapper: ObjectMapper): HttpClientConfig<*>.() -> 
     }
 
     this.install(Logging) {
-        logger = SecurelogWrapper
+        logger = object : Logger {
+            override fun log(message: String) {
+                LOG.info("HttpClient detaljer logget til securelog")
+                SECURELOG.info(message)
+            }
+        }
         level = LogLevel.ALL
     }
     this.expectSuccess = true
