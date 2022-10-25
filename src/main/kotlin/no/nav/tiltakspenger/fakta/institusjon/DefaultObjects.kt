@@ -29,14 +29,15 @@ private object SecurelogWrapper : Logger {
     }
 }
 
-@Suppress("MagicNumber")
+// engine skal brukes primært i test-øyemed, når man sender med MockEngine.
+// Forøvrig kan man la den være null.
 fun defaultHttpClient(
     objectMapper: ObjectMapper,
     engine: HttpClientEngine? = null,
     configBlock: HttpClientConfig<*>.() -> Unit = {},
     engineConfigBlock: CIOEngineConfig.() -> Unit = {}
 ) = engine?.let {
-    HttpClient(it) {
+    HttpClient(engine) {
         apply(defaultSetup(objectMapper))
         apply(configBlock)
     }
