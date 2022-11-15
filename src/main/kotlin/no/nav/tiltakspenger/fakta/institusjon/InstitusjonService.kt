@@ -38,13 +38,13 @@ class InstitusjonService(
             withMDC(
                 "behovId" to packet["@behovId"].asText(),
             ) {
-                val fnr = packet["ident"].asText()
+                val ident = packet["ident"].asText()
                 runBlocking {
-                    instClient.hentInstitusjonsOpphold(fnr, behovId.asText())
+                    instClient.hentInstitusjonsOpphold(ident, behovId.asText())
                 }.let { response ->
                     packet["@løsning"] = Respons(opphold = response, feilmelding = null)
                     loggVedUtgang(packet)
-                    context.publish(packet.toJson())
+                    context.publish(ident, packet.toJson())
                 }
             }
         }.onFailure {
