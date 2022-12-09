@@ -1,6 +1,6 @@
 tiltakspenger-fakta-institusjon
 ================
-Løser behov for tiltakspenger-vedtak.
+Innhenter informasjon om institusjonsopphold for en søker av tiltakspenger.
 
 En del av satsningen ["Flere i arbeid – P4"](https://memu.no/artikler/stor-satsing-skal-fornye-navs-utdaterte-it-losninger-og-digitale-verktoy/)
 
