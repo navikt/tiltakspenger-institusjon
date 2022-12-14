@@ -1,4 +1,4 @@
-package no.nav.tiltakspenger.fakta.institusjon.auth
+package no.nav.tiltakspenger.institusjon.auth
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
@@ -10,9 +10,9 @@ import io.ktor.client.request.*
 import io.ktor.client.request.forms.*
 import io.ktor.http.*
 import mu.KotlinLogging
-import no.nav.tiltakspenger.fakta.institusjon.Configuration
-import no.nav.tiltakspenger.fakta.institusjon.defaultHttpClient
-import no.nav.tiltakspenger.fakta.institusjon.defaultObjectMapper
+import no.nav.tiltakspenger.institusjon.Configuration
+import no.nav.tiltakspenger.institusjon.defaultHttpClient
+import no.nav.tiltakspenger.institusjon.defaultObjectMapper
 import java.time.LocalDateTime
 
 

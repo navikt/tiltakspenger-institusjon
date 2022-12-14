@@ -1,4 +1,4 @@
-package no.nav.tiltakspenger.fakta.institusjon.model
+package no.nav.tiltakspenger.institusjon.model
 
 data class Respons(
     val opphold: List<InstitusjonsOpphold>,

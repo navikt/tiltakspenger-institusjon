@@ -1,10 +1,10 @@
-package no.nav.tiltakspenger.fakta.institusjon
+package no.nav.tiltakspenger.institusjon
 
 import mu.KotlinLogging
 import no.nav.helse.rapids_rivers.RapidApplication
 import no.nav.helse.rapids_rivers.RapidsConnection
-import no.nav.tiltakspenger.fakta.institusjon.auth.AzureTokenProvider
-import no.nav.tiltakspenger.fakta.institusjon.client.InstitusjonClient
+import no.nav.tiltakspenger.institusjon.auth.AzureTokenProvider
+import no.nav.tiltakspenger.institusjon.client.InstitusjonClient
 
 fun main() {
     System.setProperty("logback.configurationFile", "egenLogback.xml")
@@ -26,7 +26,7 @@ fun main() {
 
             register(object : RapidsConnection.StatusListener {
                 override fun onStartup(rapidsConnection: RapidsConnection) {
-                    log.info { "Starting tiltakspenger-fakta-institusjon" }
+                    log.info { "Starting tiltakspenger-institusjon" }
 
                     val environmentVariables = System.getenv()
                     log.info("Dette er proxy-innstillingene")
@@ -36,7 +36,7 @@ fun main() {
                 }
 
                 override fun onShutdown(rapidsConnection: RapidsConnection) {
-                    log.info { "Stopping tiltakspenger-fakta-institusjon" }
+                    log.info { "Stopping tiltakspenger-institusjon" }
                     super.onShutdown(rapidsConnection)
                 }
             })

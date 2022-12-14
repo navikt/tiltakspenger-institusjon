@@ -1,4 +1,4 @@
-package no.nav.tiltakspenger.fakta.institusjon.model
+package no.nav.tiltakspenger.institusjon.model
 
 import java.time.LocalDate
 import java.time.LocalDateTime

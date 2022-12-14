@@ -1,4 +1,4 @@
-package no.nav.tiltakspenger.fakta.institusjon
+package no.nav.tiltakspenger.institusjon
 
 import com.fasterxml.jackson.core.util.DefaultIndenter
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter

@@ -1,4 +1,4 @@
-package no.nav.tiltakspenger.fakta.institusjon
+package no.nav.tiltakspenger.institusjon
 
 import kotlinx.coroutines.runBlocking
 import mu.KotlinLogging
@@ -8,8 +8,8 @@ import no.nav.helse.rapids_rivers.MessageContext
 import no.nav.helse.rapids_rivers.RapidsConnection
 import no.nav.helse.rapids_rivers.River
 import no.nav.helse.rapids_rivers.withMDC
-import no.nav.tiltakspenger.fakta.institusjon.client.InstitusjonClient
-import no.nav.tiltakspenger.fakta.institusjon.model.Respons
+import no.nav.tiltakspenger.institusjon.client.InstitusjonClient
+import no.nav.tiltakspenger.institusjon.model.Respons
 
 private val LOG = KotlinLogging.logger {}
 private val SECURELOG = KotlinLogging.logger("tjenestekall")

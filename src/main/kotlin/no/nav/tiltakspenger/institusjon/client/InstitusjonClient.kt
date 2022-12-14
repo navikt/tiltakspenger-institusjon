@@ -1,4 +1,4 @@
-package no.nav.tiltakspenger.fakta.institusjon.client
+package no.nav.tiltakspenger.institusjon.client
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.ktor.client.*
@@ -6,10 +6,10 @@ import io.ktor.client.call.*
 import io.ktor.client.engine.*
 import io.ktor.client.request.*
 import io.ktor.http.*
-import no.nav.tiltakspenger.fakta.institusjon.Configuration
-import no.nav.tiltakspenger.fakta.institusjon.defaultHttpClient
-import no.nav.tiltakspenger.fakta.institusjon.defaultObjectMapper
-import no.nav.tiltakspenger.fakta.institusjon.model.InstitusjonsOpphold
+import no.nav.tiltakspenger.institusjon.Configuration
+import no.nav.tiltakspenger.institusjon.defaultHttpClient
+import no.nav.tiltakspenger.institusjon.defaultObjectMapper
+import no.nav.tiltakspenger.institusjon.model.InstitusjonsOpphold
 
 class InstitusjonClient(
     private val instConfig: Configuration.InstClientConfig = Configuration.InstClientConfig(),

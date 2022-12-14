@@ -68,7 +68,7 @@ configurations.all {
 }
 
 application {
-    mainClass.set("no.nav.tiltakspenger.fakta.institusjon.ApplicationKt")
+    mainClass.set("no.nav.tiltakspenger.institusjon.ApplicationKt")
 }
 
 java {

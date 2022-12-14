@@ -1,4 +1,4 @@
-package no.nav.tiltakspenger.fakta.institusjon
+package no.nav.tiltakspenger.institusjon
 
 import com.natpryce.konfig.ConfigurationMap
 import com.natpryce.konfig.ConfigurationProperties.Companion.systemProperties
@@ -6,7 +6,7 @@ import com.natpryce.konfig.EnvironmentVariables
 import com.natpryce.konfig.Key
 import com.natpryce.konfig.overriding
 import com.natpryce.konfig.stringType
-import no.nav.tiltakspenger.fakta.institusjon.auth.AzureTokenProvider
+import no.nav.tiltakspenger.institusjon.auth.AzureTokenProvider
 
 object Configuration {
 //    private fun getPropertyValueByEnvironment(devValue: String, prodValue: String): String {
@@ -29,14 +29,14 @@ object Configuration {
 //    )
 
     val rapidsAndRivers = mapOf(
-        "RAPID_APP_NAME" to "tiltakspenger-fakta-institusjon",
+        "RAPID_APP_NAME" to "tiltakspenger-institusjon",
         "KAFKA_BROKERS" to System.getenv("KAFKA_BROKERS"),
         "KAFKA_CREDSTORE_PASSWORD" to System.getenv("KAFKA_CREDSTORE_PASSWORD"),
         "KAFKA_TRUSTSTORE_PATH" to System.getenv("KAFKA_TRUSTSTORE_PATH"),
         "KAFKA_KEYSTORE_PATH" to System.getenv("KAFKA_KEYSTORE_PATH"),
         "KAFKA_RAPID_TOPIC" to "tpts.rapid.v1",
         "KAFKA_RESET_POLICY" to "latest",
-        "KAFKA_CONSUMER_GROUP_ID" to "tiltakspenger-fakta-institusjon-v1",
+        "KAFKA_CONSUMER_GROUP_ID" to "tiltakspenger-institusjon-v1",
     )
 
     private val otherDefaultProperties = mapOf(
@@ -102,14 +102,14 @@ object Configuration {
 
 //    private val defaultProperties =
 //        mapOf(
-//            "RAPID_APP_NAME" to "tiltakspenger-fakta-institusjon",
+//            "RAPID_APP_NAME" to "tiltakspenger-institusjon",
 //            "KAFKA_BROKERS" to System.getenv("KAFKA_BROKERS"),
 //            "KAFKA_CREDSTORE_PASSWORD" to System.getenv("KAFKA_CREDSTORE_PASSWORD"),
 //            "KAFKA_TRUSTSTORE_PATH" to System.getenv("KAFKA_TRUSTSTORE_PATH"),
 //            "KAFKA_KEYSTORE_PATH" to System.getenv("KAFKA_KEYSTORE_PATH"),
 //            "KAFKA_RAPID_TOPIC" to "tpts.rapid.v1",
 //            "KAFKA_RESET_POLICY" to "latest",
-//            "KAFKA_CONSUMER_GROUP_ID" to "tiltakspenger-fakta-institusjon-v1"
+//            "KAFKA_CONSUMER_GROUP_ID" to "tiltakspenger-institusjon-v1"
 //        )
 
 //    fun asMap(): Map<String, String> = defaultProperties

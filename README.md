@@ -1,4 +1,4 @@
-tiltakspenger-fakta-institusjon
+tiltakspenger-institusjon
 ================
 Innhenter informasjon om institusjonsopphold for en søker av tiltakspenger.
 
