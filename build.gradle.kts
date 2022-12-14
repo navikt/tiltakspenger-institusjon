@@ -10,6 +10,7 @@ plugins {
     application
     kotlin("jvm") version "1.7.22"
     id("io.gitlab.arturbosch.detekt") version "1.22.0"
+    id("ca.cutterslade.analyze") version "1.9.0"
 }
 
 repositories {
@@ -30,6 +31,7 @@ dependencies {
     implementation("io.github.microutils:kotlin-logging-jvm:3.0.4")
     implementation("org.jetbrains:annotations:23.1.0")
     implementation("com.natpryce:konfig:1.6.10.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.6.4")
     // Ktor client
     implementation("io.ktor:ktor-client-auth:$ktorVersion")
     implementation("io.ktor:ktor-client-core-jvm:$ktorVersion")
@@ -41,7 +43,6 @@ dependencies {
     implementation("io.ktor:ktor-http-jvm:$ktorVersion")
     implementation("io.ktor:ktor-client-logging-jvm:$ktorVersion")
     // Serialization
-    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:$jacksonVersion")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
     implementation("com.fasterxml.jackson.core:jackson-core:$jacksonVersion")
     implementation("com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion")
@@ -58,8 +59,6 @@ dependencies {
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("io.mockk:mockk:$mockkVersion")
-    testImplementation("io.mockk:mockk-dsl-jvm:$mockkVersion")
-    testImplementation("org.skyscreamer:jsonassert:1.5.1")
 }
 
 configurations.all {
@@ -95,5 +94,13 @@ tasks {
         useJUnitPlatform()
         // https://phauer.com/2018/best-practices-unit-testing-kotlin/
         systemProperty("junit.jupiter.testinstance.lifecycle.default", "per_class")
+    }
+    analyzeClassesDependencies {
+        warnUsedUndeclared = true
+        warnUnusedDeclared = true
+    }
+    analyzeTestClassesDependencies {
+        warnUsedUndeclared = true
+        warnUnusedDeclared = true
     }
 }
