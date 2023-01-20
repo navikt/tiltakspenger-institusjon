@@ -1,11 +1,15 @@
 package no.nav.tiltakspenger.institusjon.client
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import io.ktor.client.*
-import io.ktor.client.call.*
-import io.ktor.client.engine.*
-import io.ktor.client.request.*
-import io.ktor.http.*
+import io.ktor.client.HttpClient
+import io.ktor.client.call.body
+import io.ktor.client.engine.HttpClientEngine
+import io.ktor.client.request.accept
+import io.ktor.client.request.get
+import io.ktor.client.request.header
+import io.ktor.http.ContentType
+import io.ktor.http.HttpHeaders
+import io.ktor.http.contentType
 import no.nav.tiltakspenger.institusjon.Configuration
 import no.nav.tiltakspenger.institusjon.defaultHttpClient
 import no.nav.tiltakspenger.institusjon.defaultObjectMapper

@@ -85,7 +85,7 @@ class InstitusjonService(
             "feil ved behandling av behov med {}, se securelogs for detaljer",
             StructuredArguments.keyValue("id", packet["@id"].asText()),
             StructuredArguments.keyValue("behovId", packet["@behovId"].asText()),
-            ex //Midlertidig!
+            ex // Midlertidig!
         )
         LOG.error(
             "feil ${ex.message} ved behandling av behov med {} og {}",

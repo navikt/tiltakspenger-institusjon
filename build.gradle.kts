@@ -9,7 +9,7 @@ val mockkVersion = "1.13.3"
 plugins {
     application
     kotlin("jvm") version "1.8.0"
-    id("io.gitlab.arturbosch.detekt") version "1.22.0"
+    id("com.diffplug.spotless") version "5.0.0"
     id("ca.cutterslade.analyze") version "1.9.0"
 }
 
@@ -22,7 +22,6 @@ repositories {
 
 dependencies {
     //implementation(project(":azureAuth"))
-    // detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.20.0")
 
     // Align versions of all Kotlin components
     implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
@@ -75,10 +74,10 @@ java {
     targetCompatibility = javaVersion
 }
 
-detekt {
-    buildUponDefaultConfig = true
-    allRules = false
-    config = files("$projectDir/config/detekt.yml")
+spotless {
+    kotlin {
+        ktlint("0.45.2")
+    }
 }
 
 tasks {

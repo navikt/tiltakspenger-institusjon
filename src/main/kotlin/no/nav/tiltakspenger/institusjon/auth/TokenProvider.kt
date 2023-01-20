@@ -1,20 +1,20 @@
 package no.nav.tiltakspenger.institusjon.auth
 
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 import com.fasterxml.jackson.databind.ObjectMapper
-import io.ktor.client.call.*
-import io.ktor.client.engine.*
-import io.ktor.client.request.*
-import io.ktor.client.request.forms.*
-import io.ktor.http.*
+import io.ktor.client.call.body
+import io.ktor.client.engine.HttpClientEngine
+import io.ktor.client.engine.ProxyBuilder
+import io.ktor.client.engine.http
+import io.ktor.client.request.forms.submitForm
+import io.ktor.client.request.get
+import io.ktor.http.Parameters
 import mu.KotlinLogging
 import no.nav.tiltakspenger.institusjon.Configuration
 import no.nav.tiltakspenger.institusjon.defaultHttpClient
 import no.nav.tiltakspenger.institusjon.defaultObjectMapper
 import java.time.LocalDateTime
-
 
 private val LOG = KotlinLogging.logger {}
 
@@ -22,7 +22,6 @@ fun interface TokenProvider {
     suspend fun getToken(): String
 }
 
-@Suppress("TooGenericExceptionCaught")
 class AzureTokenProvider(
     objectMapper: ObjectMapper = defaultObjectMapper(),
     engine: HttpClientEngine? = null,
