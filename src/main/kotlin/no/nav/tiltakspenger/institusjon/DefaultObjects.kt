@@ -31,7 +31,7 @@ fun defaultHttpClient(
     objectMapper: ObjectMapper,
     engine: HttpClientEngine? = null,
     configBlock: HttpClientConfig<*>.() -> Unit = {},
-    engineConfigBlock: CIOEngineConfig.() -> Unit = {}
+    engineConfigBlock: CIOEngineConfig.() -> Unit = {},
 ) = engine?.let {
     HttpClient(engine) {
         apply(defaultSetup(objectMapper))
@@ -72,6 +72,6 @@ fun defaultObjectMapper(): ObjectMapper = ObjectMapper()
         DefaultPrettyPrinter().apply {
             indentArraysWith(DefaultPrettyPrinter.FixedSpaceIndenter.instance)
             indentObjectsWith(DefaultIndenter("  ", "\n"))
-        }
+        },
     )
     .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)

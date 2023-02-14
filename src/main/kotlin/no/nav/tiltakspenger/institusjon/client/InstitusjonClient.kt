@@ -22,8 +22,8 @@ class InstitusjonClient(
     engine: HttpClientEngine? = null,
     private val httpClient: HttpClient = defaultHttpClient(
         objectMapper = objectMapper,
-        engine = engine
-    )
+        engine = engine,
+        ),
 ) {
     companion object {
         const val navCallIdHeader = "Nav-Call-Id"

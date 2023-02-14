@@ -55,7 +55,7 @@ object Configuration {
             "application.profile" to Profile.LOCAL.toString(),
             "instScope" to "api://dev-fss.team-rocket.inst2/.default",
             "instBaseUrl" to "https://inst2.dev.intern.nav.no",
-        )
+        ),
     )
     private val devProperties = ConfigurationMap(
         mapOf(
@@ -63,7 +63,7 @@ object Configuration {
             "application.profile" to Profile.DEV.toString(),
             "instScope" to "api://dev-fss.team-rocket.inst2/.default",
             "instBaseUrl" to "http://inst2.team-rocket.svc.nais.local",
-        )
+        ),
     )
     private val prodProperties = ConfigurationMap(
         mapOf(
@@ -71,7 +71,7 @@ object Configuration {
             "application.profile" to Profile.PROD.toString(),
             "instScope" to "api://prod-fss.team-rocket.inst2/.default",
             "instBaseUrl" to "http://inst2.team-rocket.svc.nais.local",
-        )
+        ),
     )
 
     private fun config() = when (System.getenv("NAIS_CLUSTER_NAME") ?: System.getProperty("NAIS_CLUSTER_NAME")) {
@@ -90,12 +90,12 @@ object Configuration {
         scope: String = config()[Key("instScope", stringType)],
         clientId: String = config()[Key("AZURE_APP_CLIENT_ID", stringType)],
         clientSecret: String = config()[Key("AZURE_APP_CLIENT_SECRET", stringType)],
-        wellknownUrl: String = config()[Key("AZURE_APP_WELL_KNOWN_URL", stringType)]
+        wellknownUrl: String = config()[Key("AZURE_APP_WELL_KNOWN_URL", stringType)],
     ) = AzureTokenProvider.OauthConfig(
         scope = scope,
         clientId = clientId,
         clientSecret = clientSecret,
-        wellknownUrl = wellknownUrl
+        wellknownUrl = wellknownUrl,
     )
 
     data class InstClientConfig(

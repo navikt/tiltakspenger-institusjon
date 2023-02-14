@@ -21,7 +21,7 @@ fun main() {
         .apply {
             InstitusjonService(
                 rapidsConnection = this,
-                instClient = InstitusjonClient(getToken = tokenProvider::getToken)
+                instClient = InstitusjonClient(getToken = tokenProvider::getToken),
             )
 
             register(object : RapidsConnection.StatusListener {
