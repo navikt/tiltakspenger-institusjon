@@ -19,7 +19,7 @@ object Configuration {
 //
 //    fun getInstUrl(): String = getPropertyValueByEnvironment(
 // //        devValue = "https://inst2.default.svc.nais.local/api/v1/person/institusjonsopphold",
-//        devValue = "https://inst2.dev.intern.nav.no/api/v1/person/institusjonsopphold",
+//        devValue = "https://inst2.intern.dev.nav.no/api/v1/person/institusjonsopphold",
 //        prodValue = "https://inst2.default.svc.nais.local/api/v1/person/institusjonsopphold",
 //    )
 //
@@ -54,7 +54,7 @@ object Configuration {
 //            "url" to "",
             "application.profile" to Profile.LOCAL.toString(),
             "instScope" to "api://dev-fss.team-rocket.inst2/.default",
-            "instBaseUrl" to "https://inst2.dev.intern.nav.no",
+            "instBaseUrl" to "https://inst2.intern.dev.nav.no",
         ),
     )
     private val devProperties = ConfigurationMap(
