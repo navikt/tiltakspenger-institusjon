@@ -30,7 +30,7 @@ dependencies {
     implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
     implementation("org.jetbrains:annotations:24.0.1")
     implementation("com.natpryce:konfig:1.6.10.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.7.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.7.3")
     // Ktor client
     implementation("io.ktor:ktor-client-auth:$ktorVersion")
     implementation("io.ktor:ktor-client-core-jvm:$ktorVersion")
