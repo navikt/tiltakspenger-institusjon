@@ -8,7 +8,7 @@ val mockkVersion = "1.13.7"
 
 plugins {
     application
-    kotlin("jvm") version "1.9.0"
+    kotlin("jvm") version "1.9.10"
     id("com.diffplug.spotless") version "6.20.0"
     id("ca.cutterslade.analyze") version "1.9.1"
 }
